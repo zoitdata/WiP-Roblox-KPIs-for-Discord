@@ -46,7 +46,7 @@ Discord Channel Reports
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```text
 ├── Backend/
