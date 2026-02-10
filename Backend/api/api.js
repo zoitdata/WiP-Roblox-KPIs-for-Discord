@@ -1,6 +1,6 @@
 const express = require("express")
-const state = require("./state")
-const discord = require("./discord")
+const state = require("../utils/state")
+const discord = require("../bot/discord")
 const auth = require("./auth")
 
 const router = express.Router()
