@@ -12,7 +12,7 @@ router.post("/ccu", auth, (req, res) => {
 
   if (ccu > state.weekly.peakCCU) state.weekly.peakCCU = ccu
 
-  if (ccu >= 500 && state.alerts.lastCCU < 500) {
+  if (ccu >= 500 && state.alerts.lastCCU < 500) {    // can be changed accordingly to your game  
     discord.send(process.env.DISCORD_CHANNEL_ALERTS, `CCU alert\nCurrent CCU: ${ccu}`)
   }
 
@@ -32,7 +32,7 @@ router.post("/purchase", auth, (req, res) => {
   state.processedReceipts.add(receiptId)
   state.daily.revenue += amount
 
-  if (amount >= 20000) {
+  if (amount >= 20000) {   // can be changed accordingly to your game, default amount in this case 20000
     discord.send(process.env.DISCORD_CHANNEL_ALERTS, `Revenue alert\nAmount: ${amount}`)
   }
 
