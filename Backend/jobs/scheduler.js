@@ -42,13 +42,14 @@ setInterval(() => {
     [date, avgCCU, peakCCU, state.daily.revenue, avgSession, state.daily.joins]
   )
 
-  discord.send(
+  discord.sendDailySummary(
     process.env.DISCORD_THREAD_DAILY,
-    `Daily KPIs
-    Date: ${date}
-    Joins: ${state.daily.joins}
-    Revenue: ${state.daily.revenue}
-    Avg Session Length: ${avgSession} min`
+    {
+      date,
+      joins: state.daily.joins,
+      revenue: state.daily.revenue,
+      session: avgSession
+    }
   )
 
   createBackup()
@@ -63,14 +64,13 @@ setInterval(() => {
 }, 24 * 60 * 60 * 1000)
 
 
-
 //weekly report
 
 setInterval(() => {
   db.all(
     `SELECT * FROM daily_kpis ORDER BY date DESC LIMIT 7`,
     async (_, rows) => {
-      if (!rows.length) return
+      if (!rows || !rows.length) return
 
       const c1 = await ccuChart(rows)
       const c2 = await sessionChart(rows)
@@ -79,11 +79,12 @@ setInterval(() => {
       const peak = Math.max(...rows.map(r => r.peak_ccu))
       const totalRevenue = rows.reduce((s, r) => s + r.total_revenue, 0)
 
-      await discord.send(
+      await discord.sendWeeklySummary(
         process.env.DISCORD_THREAD_WEEKLY,
-        `Weekly Summary
-Peak CCU: ${peak}
-Total Revenue: ${totalRevenue}`,
+        {
+          peak,
+          totalRevenue
+        },
         [c1, c2, c3]
       )
     }
@@ -141,13 +142,14 @@ setInterval(() => {
           revenue >= MIN_ABSOLUTE_THRESHOLD &&
           cooldownPassed
         ) {
-          discord.send(
+          discord.sendRevenueSpike(
             process.env.DISCORD_THREAD_ALERTS,
-            `Revenue Spike Detected
-Hour: ${state.hourly.currentHour}
-Revenue: ${revenue}
-24h Avg: ${Math.round(avg)}
-Multiplier: ${(revenue / avg).toFixed(2)}x`
+            {
+              hour: state.hourly.currentHour,
+              revenue,
+              average: Math.round(avg),
+              multiplier: (revenue / avg).toFixed(2)
+            }
           )
 
           lastAlertTime = now
