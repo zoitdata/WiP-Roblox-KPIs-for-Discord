@@ -26,7 +26,7 @@ router.post("/ccu", auth, (req, res) => {
   res.sendStatus(200)
 })
 
-//palyer join
+//player join
 
 router.post("/join", auth, (req, res) => {
   state.daily.joins++
