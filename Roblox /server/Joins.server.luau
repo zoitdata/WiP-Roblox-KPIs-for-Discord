@@ -5,7 +5,7 @@ local HttpService = game:GetService("HttpService")
 local Config = require(script.Config)
 local Auth = require(script.Auth)
 
-local URL = Config.BACKEND_BASE_URL .. "/roblox/join"
+local URL = Config.BACKEND_BASE_URL .. "/roblox/join"		--change accordingly
 
 Players.PlayerAdded:Connect(function()
 	local body = "{}"
