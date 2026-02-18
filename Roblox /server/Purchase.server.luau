@@ -5,7 +5,7 @@ local HttpService = game:GetService("HttpService")
 local Config = require(script.Config)
 local Auth = require(script.Auth)
 
-local URL = Config.BACKEND_BASE_URL .. "/roblox/purchase"
+local URL = Config.BACKEND_BASE_URL .. "/roblox/purchase"		--change accordingly
 
 MarketplaceService.ProcessReceipt = function(r)
 	local body = HttpService:JSONEncode({
