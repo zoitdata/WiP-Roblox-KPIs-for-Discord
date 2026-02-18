@@ -97,7 +97,6 @@ DISCORD_CHANNEL_ID=your_channel_id
 PORT=3000
 SECRET_KEY=shared_secret_key
 DATABASE_PATH=./database/data.sqlite
-
 ````
 
 Variable names may vary depending on the implementation.
