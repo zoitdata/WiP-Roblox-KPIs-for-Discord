@@ -5,8 +5,8 @@ local HttpService = game:GetService("HttpService")
 local Config = require(script.Config)
 local Auth = require(script.Auth)
 
-local START = Config.BACKEND_BASE_URL .. "/roblox/session/start"
-local END = Config.BACKEND_BASE_URL .. "/roblox/session/end"
+local START = Config.BACKEND_BASE_URL .. "/roblox/session/start"	--change accordingly
+local END = Config.BACKEND_BASE_URL .. "/roblox/session/end"		--change accordingly
 
 Players.PlayerAdded:Connect(function(p)
 	local body = HttpService:JSONEncode({ playerId = p.UserId, timestamp = os.time() })
