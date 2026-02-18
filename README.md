@@ -111,10 +111,10 @@ Check where environment variables are used in the code.
 - Create a new application
 - Add a bot
 - Copy the bot token
-- Invite the bot to your server with:
-- Send Messages
-- Embed Links
-- Attach Files
+- Invite the bot to your server with the following permissions:
+  1. Send Messages
+  2. Embed Links
+  3. Attach Files
 
 ---
 
